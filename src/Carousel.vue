@@ -807,11 +807,14 @@ export default {
       const remainderOffset =
         lastFullPageOffset +
         this.slideWidth * (this.slideCount % this.currentPerPage);
-      if (this.offset > (lastFullPageOffset + remainderOffset) / 2) {
-        this.offset = remainderOffset;
-      } else {
-        this.offset = width * Math.round(this.offset / width);
-      }
+
+      // if (this.offset > (lastFullPageOffset + remainderOffset) / 2) {
+      //   this.offset = remainderOffset;
+      // } else {
+      //   this.offset = width * Math.round(this.offset / width);
+      // }
+      // Workaround for https://github.com/SSENSE/vue-carousel/issues/345
+      this.offset = width * Math.round(this.offset / width);
 
       // clamp the offset between 0 -> maxOffset
       this.offset = Math.max(0, Math.min(this.offset, this.maxOffset));
